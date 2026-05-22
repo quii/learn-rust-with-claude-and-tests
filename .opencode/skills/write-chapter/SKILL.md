@@ -111,6 +111,15 @@ If anything doesn't match — wrong error message, missing step, output that cha
 - The final commit message for a chapter should be: `<Chapter Name>: chapter prose and code following TDD steps incrementally`
 - The `target/` directory is gitignored — never commit build output
 
+### 11. Update AGENTS.md after each chapter
+
+After completing a chapter, update `AGENTS.md` in the project root to reflect the new state:
+
+- Add the chapter to the **Completed chapters** list with its key Rust and testing concepts
+- Update the **Current state of the code** section if the final code is in a new file
+- Update **Next steps** to remove the completed chapter and note what comes next
+- Commit this update alongside the chapter commit (or as a follow-up commit)
+
 ## What goes where
 
 - Exercise code: `<chapter-name>/src/main.rs` (or `lib.rs` for library crates)
