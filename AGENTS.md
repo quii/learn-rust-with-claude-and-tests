@@ -25,13 +25,24 @@ Plan chapter together → AI executes (TDD incrementally, real output) → autho
 
 ## Current state of the code
 
-### strings-and-iteration/src/lib.rs
+### structs/src/lib.rs
 
 Final state:
 
 ```rust
-pub fn repeat(s: &str, n: usize) -> String {
-    s.repeat(n)
+pub struct Rectangle {
+    pub width: f64,
+    pub height: f64,
+}
+
+impl Rectangle {
+    pub fn perimeter(&self) -> f64 {
+        2.0 * (self.width + self.height)
+    }
+
+    pub fn area(&self) -> f64 {
+        self.width * self.height
+    }
 }
 
 #[cfg(test)]
@@ -39,8 +50,15 @@ mod tests {
     use super::*;
 
     #[test]
-    fn repeat_a_string() {
-        assert_eq!(repeat("na", 4), "nananana");
+    fn perimeter_of_rectangle() {
+        let r = Rectangle { width: 10.0, height: 5.0 };
+        assert_eq!(r.perimeter(), 30.0);
+    }
+
+    #[test]
+    fn area_of_rectangle() {
+        let r = Rectangle { width: 10.0, height: 5.0 };
+        assert_eq!(r.area(), 50.0);
     }
 }
 ```
@@ -59,9 +77,9 @@ mod tests {
    - Covers: `String` vs `&str`, `let mut`, `String::new()`, `push_str`, `for _ in 0..n`, `usize`, refactoring to `s.repeat(n)`
    - Testing: tests drive you to the right types
 
-## Next steps
-
-1. Plan and write the next chapter — following LGWT order
+4. **Structs** (`src/fundamentals/structs.md`, code in `structs/`)
+   - Covers: `struct`, `pub` on fields, `f64`, field access with `.`, `impl`, `&self`, ownership contrast (`r: Rectangle` takes ownership, `&self` borrows)
+   - Testing: writing a test before the type exists; fixing compiler errors one at a time
 
 ## Key files
 

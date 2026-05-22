@@ -46,4 +46,4 @@ We want to calculate the perimeter and area of rectangles.
 - `area` step felt very natural after `perimeter` — the pattern clicks quickly
 
 ## Status
-teaching-complete
+complete
