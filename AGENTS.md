@@ -64,7 +64,7 @@ mod tests {
 
 ## Next steps
 
-1. Plan and write the next chapter — floats or strings following LGWT order
+1. Plan and write the next chapter — strings or iteration following LGWT order
 
 ## Key files
 
