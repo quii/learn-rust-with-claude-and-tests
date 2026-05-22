@@ -36,5 +36,14 @@ We want to calculate the perimeter and area of rectangles.
 6. Area — second red/green cycle using the same pattern
 7. Wrapping up
 
+## Teaching notes
+
+- Two compiler errors in red step come sequentially — first `Rectangle` not found, then `perimeter` not found; good to address one at a time
+- `pub` needed on struct fields — easy to miss; worth calling out explicitly
+- Ownership contrast is the key teaching moment in the refactor: `r: Rectangle` takes ownership (can't use `r` after), `&self` borrows (can use `r` after)
+- `impl` block is the natural home for methods — groups behaviour with data
+- `self.width` / `self.height` inside `impl` mirrors `r.width` / `r.height` outside — same idea, different syntax
+- `area` step felt very natural after `perimeter` — the pattern clicks quickly
+
 ## Status
-planning-approved
+teaching-complete
