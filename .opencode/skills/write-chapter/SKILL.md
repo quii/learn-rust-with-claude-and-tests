@@ -83,15 +83,16 @@ Every chapter follows this shape:
 
 ### 8. Walk the author through the chapter as you write it
 
-Do not write the full chapter in one go and present it for review. Instead, work through it collaboratively, one requirement at a time:
+Do not write the full chapter in one go and present it for review. Instead, plan it collaboratively first:
 
-1. Introduce the next requirement
-2. Guide the author through the TDD steps — tell them what to write and why, but let them type and run it themselves
-3. Ask them to paste the output back
-4. Use the real output to inform the prose
-5. Only move to the next requirement once the current one is green and committed
+1. Agree on the requirements for the chapter — what the code will do by the end
+2. Agree on the order — what gets introduced first, what teaching moments each step creates
+3. Discuss any Rust concepts that need particular care or explanation
+4. Get early feedback on anything that feels wrong before writing a line
 
-This keeps the author genuinely on the journey. It surfaces problems early — if a step is confusing or a concept needs more explanation, the author will say so before the whole chapter is written. It also means the book is honest: the author has done what the reader is being asked to do.
+Once the shape is agreed, execute it yourself: follow the TDD process, write and run the code incrementally, capture real output, then write the prose. Present the finished chapter for the author to review and edit.
+
+This keeps the author in the driving seat of the book's direction without requiring them to paste output back and forth for every step.
 
 ### 9. Proof-read as a reader
 
