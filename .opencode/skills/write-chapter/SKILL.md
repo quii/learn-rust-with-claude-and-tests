@@ -55,6 +55,22 @@ Commit discipline during the writing phase:
 - Final commit message: `<Chapter Name>: chapter prose and code following TDD steps incrementally`
 - After the chapter is done, update `AGENTS.md` and commit that too
 
+### Proof-read as a reader — REQUIRED before announcing the chapter is done
+
+Do not tell the author the chapter is complete before finishing this step. Do not skip it.
+
+Reset the exercise file to its `cargo new` default, then follow the chapter's own instructions exactly — make only the changes the chapter describes, run every command it shows, and verify every piece of output matches what the terminal actually produces.
+
+Checklist (every item must be confirmed):
+- Reset exercise file to `cargo new` default
+- Follow chapter instructions step by step, making no changes not described in the prose
+- Every compiler error shown in the prose matches the real output
+- Every `cargo test` result shown in the prose matches the real output
+- Every `cargo run` or `cargo doc` result shown matches the real output
+- No steps are missing — a reader following only the prose can reach green from scratch
+
+If anything doesn't match, fix the prose and re-run before committing. Only after this checklist is complete should the chapter be committed and the author told it is ready.
+
 
 
 ## What goes where
