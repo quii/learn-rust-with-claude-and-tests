@@ -11,126 +11,51 @@ This skill governs the full process for writing a chapter. It exists because the
 
 The book teaches TDD by example. If the chapter is written by producing the final code first and then narrating around it, the writing will feel false, steps will be missing or wrong, and the compiler output will be reconstructed rather than real. Readers notice. Don't do it.
 
-## The process
+## The three phases
 
-### 1. Establish the requirement
+Every chapter goes through three phases in order. Do not skip or merge them.
 
-Every chapter starts with a plain-English business requirement. State it clearly before writing any code or tests. Example: "We want a `greet` function that returns a personalised greeting."
+### Phase 1: Planning
 
-### 2. Create the exercise project
+Before any code or teaching, agree the shape of the chapter:
 
-```sh
-cargo new <chapter-name>
-cd <chapter-name>
-```
+1. The business requirement — what the code will do by the end
+2. The Rust features that will be introduced, and why each one earns its place
+3. The teaching order — what gets introduced first, what compiler errors create which teaching moments
+4. Any concepts that need particular care or that should be deferred to a later chapter
 
-Show the generated files and explain them briefly. Run `cargo run` to show the default output before touching anything.
+Get the author's sign-off before moving to phase 2.
 
-### 3. Follow the TDD cycle — incrementally
+### Phase 2: Teaching
 
-For each requirement:
+Take the author through the journey step by step. The author types every line of code and runs every command. The AI teaches.
 
-1. **Write the test first** — do not write the implementation yet
-2. **Run `cargo test`** and capture the actual output
-3. **Make the minimum change** to move forward (fix a compile error, make a test pass)
-4. **Run `cargo test` again** and capture the actual output
-5. **Repeat** until green
-6. **Refactor** if needed — run `cargo test` after *every individual refactoring change*, not just at the end
-7. **Commit** at green before moving to the next requirement
+The rhythm:
+1. AI explains what to do next and why — gives the exact code or command
+2. Author runs it and confirms it worked (or reports if something unexpected happened)
+3. AI explains what the output means
+4. Repeat
 
-Never skip ahead to the end state. Each step must be run and observed before writing about it.
+The author does not need to paste routine output. A "yes", "done", or "it works" is enough. The author should share output when it's unexpected, surprising, or when a specific compiler error is a key teaching moment.
 
-### 4. Capture real output verbatim
+Do NOT run any commands or write any files yourself during this phase. Do NOT ask the author to commit — when a green point is reached, say "we'd commit here" and move on.
 
-Every compiler error, warning, and test result in the prose must come from actually running the command. Copy and paste from the terminal. Do not reconstruct from memory or approximate what the output "probably looks like".
+The teaching phase may surface new insights: a concept that needs more explanation, a compiler error that's more interesting than expected, a Rust quirk worth noting. Take note of these — they inform the writing phase.
 
-This includes:
-- Compiler errors (`error[E0425]: ...`)
-- Warnings (`warning: unused variable: ...`)
-- Test output (`test result: ok. 1 passed; ...`)
-- `cargo run` output
+### Phase 3: Writing
 
-When trimming long output, remove whole lines that add no value but do not alter or paraphrase what remains. Also strip any machine-specific paths (e.g. `/Users/yourname/...`) — replace them with a generic form like `/path/to/<chapter-name>` so the output is portable for any reader.
+Once the teaching phase is complete, write the chapter prose. This is the only phase where the AI writes files and runs commands.
 
-### 5. Compiler errors are teaching moments
+Follow strict TDD: write the test, run it (red), write the minimum implementation, run it (green), refactor if needed, run it again. Every piece of output in the prose comes from actually running the commands — never reconstructed.
 
-Rust's compiler errors are unusually informative. When a step produces an error, don't rush past it — name what it's telling the reader and explain why it matters. The reader is learning to use the compiler as a collaborator.
+Write and show the prose incrementally — one section at a time — and get the author's confirmation before moving on. Do not write the full chapter in one go.
 
-### 6. Write the prose around the journey
+Commit discipline during the writing phase:
+- Commit at every green point before adding the next requirement
+- Final commit message: `<Chapter Name>: chapter prose and code following TDD steps incrementally`
+- After the chapter is done, update `AGENTS.md` and commit that too
 
-The prose narrates what just happened and why. The rhythm is:
 
-- State the next requirement or observation
-- Show the code change
-- Show the real output
-- Explain what the output means and what to do next
-- Repeat
-
-Voice: teaching, not documenting. Brisk, not padded. Trust the reader to be intelligent. Link to the `principles/` docs rather than re-explaining TDD concepts inline.
-
-### 7. Chapter structure
-
-Every chapter follows this shape:
-
-1. **Introduction** — the business requirement, brief context
-2. **How to test** — why we separate concerns before writing any tests
-3. **Write the test first** — red step, with real compiler/test output; explain new testing concepts as they appear
-4. **Make it pass** — green step, minimum code, real output; explain new Rust concepts as they appear
-5. **Refactor** — if applicable, with tests re-run to confirm
-6. **Commit** — explicitly tell the reader to commit at green
-7. Repeat steps 3–6 for each new requirement
-8. **Wrapping up** — two lists: Rust concepts introduced, TDD/testing concepts introduced; link to relevant principles pages
-
-### 8. The author drives — the AI teaches
-
-The author runs every command and writes every line of code. The AI's role is to teach: explain what to do next, why, and what to expect — then wait for the author to do it and paste the output back.
-
-The correct rhythm is:
-
-1. AI says: "Here's what to do next and why." Gives the exact code or command.
-2. Author runs it and confirms it worked (or pastes output if it's unexpected or interesting).
-3. AI explains what the output means and what it tells us — based on what the output should be, or what the author reports.
-4. AI says what to do next.
-5. Repeat.
-
-The author does not need to paste routine output back. A simple "done" or "got it" is enough to move forward. The author should paste output when: it's unexpected, it's an error we need to discuss, or it's a key teaching moment (e.g. the first time a compiler error appears).
-
-Do NOT run `cargo test`, write files, or execute any part of the chapter yourself. Every piece of terminal output in the book must come from the author's terminal, not a tool call.
-
-The AI writes the prose *after* the author has completed each step and confirmed it — not before, and not speculatively. Prose is written incrementally, one step at a time, and shown to the author for review before moving on.
-
-Do NOT write the full chapter in one go. Do NOT present a finished chapter for review. Teach step by step, in real time.
-
-### 9. Proof-read as a reader
-
-After the chapter is written, the author verifies it from a blank slate:
-
-1. Reset the exercise file to its `cargo new` default
-2. Follow the chapter's instructions exactly, making only the changes described
-3. Run every command shown
-4. Confirm every piece of output in the prose matches what the terminal actually produces
-
-The AI should prompt the author to do this before committing. If anything doesn't match, fix the prose before committing.
-
-### 10. Commit discipline
-
-There are two phases: **teaching** and **writing**.
-
-During the **teaching phase**, do not ask the author to commit. When a green point is reached, say "we'd commit here" and move on. The code will be written properly during the writing phase.
-
-During the **writing phase** (when producing the final committed chapter):
-- Commit at every green point, before adding the next requirement
-- The final commit message for a chapter should be: `<Chapter Name>: chapter prose and code following TDD steps incrementally`
-- The `target/` directory is gitignored — never commit build output
-
-### 11. Update AGENTS.md after each chapter
-
-After completing a chapter, update `AGENTS.md` in the project root to reflect the new state:
-
-- Add the chapter to the **Completed chapters** list with its key Rust and testing concepts
-- Update the **Current state of the code** section if the final code is in a new file
-- Update **Next steps** to remove the completed chapter and note what comes next
-- Commit this update alongside the chapter commit (or as a follow-up commit)
 
 ## What goes where
 
@@ -140,8 +65,10 @@ After completing a chapter, update `AGENTS.md` in the project root to reflect th
 
 ## What to avoid
 
-- Do not write the final state of the code and then write prose around it
-- Do not approximate or reconstruct compiler output — always use real output
+- Do not skip or merge the three phases
+- Do not write code or run commands during the teaching phase
+- Do not ask the author to commit during the teaching phase
+- Do not write the full chapter prose in one go — section by section, with review
+- Do not approximate or reconstruct compiler output — always use real output from the writing phase
 - Do not re-explain TDD principles that are already covered in `src/principles/` — link instead
 - Do not introduce more than one or two new Rust concepts per step without acknowledging the load on the reader
-- Do not skip the proof-reading step
