@@ -35,7 +35,7 @@ For each requirement:
 3. **Make the minimum change** to move forward (fix a compile error, make a test pass)
 4. **Run `cargo test` again** and capture the actual output
 5. **Repeat** until green
-6. **Refactor** if needed, running tests after each change
+6. **Refactor** if needed — run `cargo test` after *every individual refactoring change*, not just at the end
 7. **Commit** at green before moving to the next requirement
 
 Never skip ahead to the end state. Each step must be run and observed before writing about it.
@@ -50,7 +50,7 @@ This includes:
 - Test output (`test result: ok. 1 passed; ...`)
 - `cargo run` output
 
-If the output is long, trim the irrelevant parts but do not alter what remains.
+When trimming long output, remove whole lines that add no value but do not alter or paraphrase what remains. Also strip any machine-specific paths (e.g. `/Users/yourname/...`) — replace them with a generic form like `/path/to/<chapter-name>` so the output is portable for any reader.
 
 ### 5. Compiler errors are teaching moments
 
@@ -81,7 +81,19 @@ Every chapter follows this shape:
 7. Repeat steps 3–6 for each new requirement
 8. **Wrapping up** — two lists: Rust concepts introduced, TDD/testing concepts introduced; link to relevant principles pages
 
-### 8. Proof-read as a reader
+### 8. Walk the author through the chapter as you write it
+
+Do not write the full chapter in one go and present it for review. Instead, work through it collaboratively, one requirement at a time:
+
+1. Introduce the next requirement
+2. Guide the author through the TDD steps — tell them what to write and why, but let them type and run it themselves
+3. Ask them to paste the output back
+4. Use the real output to inform the prose
+5. Only move to the next requirement once the current one is green and committed
+
+This keeps the author genuinely on the journey. It surfaces problems early — if a step is confusing or a concept needs more explanation, the author will say so before the whole chapter is written. It also means the book is honest: the author has done what the reader is being asked to do.
+
+### 9. Proof-read as a reader
 
 After writing the chapter, verify it from a blank slate:
 
@@ -92,7 +104,7 @@ After writing the chapter, verify it from a blank slate:
 
 If anything doesn't match — wrong error message, missing step, output that changed — fix the prose or code before committing.
 
-### 9. Commit discipline
+### 10. Commit discipline
 
 - Commit at every green point, before adding the next requirement
 - The final commit message for a chapter should be: `<Chapter Name>: chapter prose and code following TDD steps incrementally`
