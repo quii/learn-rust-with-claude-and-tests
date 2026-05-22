@@ -7,6 +7,7 @@
 # Rust Fundamentals
 
 - [Hello, World](./fundamentals/hello-world.md)
+- [Integers](./fundamentals/integers.md)
 
 ---
 

@@ -25,18 +25,20 @@ Plan chapter together → AI executes (TDD incrementally, real output) → autho
 
 ## Current state of the code
 
-### hello-world/src/main.rs
+### integers/src/lib.rs
 
 Final state:
 
 ```rust
-fn main() {
-    println!("{}", greet(None));
-}
-
-fn greet(name: Option<&str>) -> String {
-    let name = name.unwrap_or("World");
-    format!("Hello, {}!", name)
+/// Adds two integers together.
+///
+/// # Examples
+///
+/// ```
+/// assert_eq!(integers::add(2, 2), 4);
+/// ```
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
 }
 
 #[cfg(test)]
@@ -44,24 +46,11 @@ mod tests {
     use super::*;
 
     #[test]
-    fn greets_world_by_default() {
-        assert_eq!(greet(None), "Hello, World!");
-    }
-
-    #[test]
-    fn greets_a_person_by_name() {
-        assert_eq!(greet(Some("Alice")), "Hello, Alice!");
+    fn add_two_integers() {
+        assert_eq!(add(2, 2), 4);
     }
 }
 ```
-
-## Key decisions
-
-- **mdBook over GitBook** — static site, Rust Playground integration, actively maintained
-- **Code inline with chapters** — exercise code lives at `<chapter-name>/src/`, not a separate `exercises/` dir
-- **Principles as book section** — `src/principles/` is published; chapters link to it rather than re-explaining TDD inline
-- **Hello World chapter flow**: `greet()` → `greet(name: &str)` → `greet(name: Option<&str>)` — parameters introduced via compiler error; `Option` introduced last as the idiomatic substitute for default arguments
-- **Rust has no default arguments** — idiomatic substitute is `Option<T>` with `unwrap_or`
 
 ## Completed chapters
 
@@ -69,9 +58,13 @@ mod tests {
    - Covers: `cargo new`, `fn`, `&str`/`String`, `format!`/`println!`, `if` as expression, variable shadowing, `Option<&str>`, `unwrap_or`
    - Testing: `#[cfg(test)]`, `mod tests`, `#[test]`, `assert_eq!`
 
+2. **Integers** (`src/fundamentals/integers.md`, code in `integers/`)
+   - Covers: `cargo new --lib`, `i32`, integer type family, no silent coercion, `///` doc comments, `cargo doc`, doc-tests, overflow behaviour
+   - Testing: doc-tests as first-class tests alongside unit tests
+
 ## Next steps
 
-1. Plan and write the next chapter — integers/variables is the natural next step following LGWT order
+1. Plan and write the next chapter — floats or strings following LGWT order
 
 ## Key files
 
