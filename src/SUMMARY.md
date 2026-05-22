@@ -8,7 +8,6 @@
 
 - [Hello, World](./fundamentals/hello-world.md)
 - [Integers](./fundamentals/integers.md)
-- [Integers](./fundamentals/integers.md)
 
 ---
 
