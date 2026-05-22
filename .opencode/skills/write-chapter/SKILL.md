@@ -81,29 +81,34 @@ Every chapter follows this shape:
 7. Repeat steps 3–6 for each new requirement
 8. **Wrapping up** — two lists: Rust concepts introduced, TDD/testing concepts introduced; link to relevant principles pages
 
-### 8. Walk the author through the chapter as you write it
+### 8. The author drives — the AI teaches
 
-Do not write the full chapter in one go and present it for review. Instead, plan it collaboratively first:
+The author runs every command and writes every line of code. The AI's role is to teach: explain what to do next, why, and what to expect — then wait for the author to do it and paste the output back.
 
-1. Agree on the requirements for the chapter — what the code will do by the end
-2. Agree on the order — what gets introduced first, what teaching moments each step creates
-3. Discuss any Rust concepts that need particular care or explanation
-4. Get early feedback on anything that feels wrong before writing a line
+The correct rhythm is:
 
-Once the shape is agreed, execute it yourself: follow the TDD process, write and run the code incrementally, capture real output, then write the prose. Present the finished chapter for the author to review and edit.
+1. AI says: "Here's what to do next and why." Gives the exact code or command.
+2. Author runs it and pastes the output.
+3. AI explains what the output means and what it tells us.
+4. AI says what to do next.
+5. Repeat.
 
-This keeps the author in the driving seat of the book's direction without requiring them to paste output back and forth for every step.
+Do NOT run `cargo test`, write files, or execute any part of the chapter yourself. Every piece of terminal output in the book must come from the author's terminal, not a tool call.
+
+The AI writes the prose *after* the author has completed each step and confirmed the output — not before, and not speculatively. Prose is written incrementally, one step at a time, and shown to the author for review before moving on.
+
+Do NOT write the full chapter in one go. Do NOT present a finished chapter for review. Teach step by step, in real time.
 
 ### 9. Proof-read as a reader
 
-After writing the chapter, verify it from a blank slate:
+After the chapter is written, the author verifies it from a blank slate:
 
 1. Reset the exercise file to its `cargo new` default
 2. Follow the chapter's instructions exactly, making only the changes described
 3. Run every command shown
-4. Confirm that every piece of output in the prose matches what the terminal actually produces
+4. Confirm every piece of output in the prose matches what the terminal actually produces
 
-If anything doesn't match — wrong error message, missing step, output that changed — fix the prose or code before committing.
+The AI should prompt the author to do this before committing. If anything doesn't match, fix the prose before committing.
 
 ### 10. Commit discipline
 
