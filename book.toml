@@ -1,6 +1,6 @@
 [book]
 title = "Learn Rust with Tests"
-authors = ["you"]
+authors = ["quii"]
 language = "en"
 src = "src"
 
@@ -8,8 +8,8 @@ src = "src"
 edition = "2021"
 
 [output.html]
-git-repository-url = "https://github.com/TODO/learn-rust-with-tests"
-edit-url-template = "https://github.com/TODO/learn-rust-with-tests/edit/main/{path}"
+git-repository-url = "https://github.com/quii/learn-rust-with-claude-and-tests"
+edit-url-template = "https://github.com/quii/learn-rust-with-claude-and-tests/edit/main/{path}"
 
 [output.html.playground]
 editable = true
