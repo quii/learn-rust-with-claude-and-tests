@@ -34,5 +34,13 @@ E.g. `repeat("na", 4)` → `"nananana"`.
 5. Refactor — `.repeat()`, re-run tests
 6. Wrapping up — concepts introduced
 
+## Teaching notes
+
+- The compiler suggested four `repeat` imports when the function didn't exist: `std::array::repeat`, `std::io::repeat`, `std::iter::repeat`, `core::array::repeat` — worth showing verbatim; `std::iter::repeat` (infinite iterator) is interesting to mention by name and defer
+- `mut` came up naturally — variables are immutable by default in Rust; removing `mut` from `result` is a good suggested experiment for the reader
+- `usize` vs `i32` — the "why not i32?" question is worth addressing; usize is the type for counts and indices, can't be negative, matches what ranges produce
+- `s.repeat(n)` is a method on `&str` (in `std::str`) — notably absent from the compiler's four suggestions, which makes it a nice discovery moment during refactor
+- Implicit return on `result` (no semicolon) ties back to Hello World and Integers — good to call out the pattern again
+
 ## Status
-planning-approved
+teaching-complete
