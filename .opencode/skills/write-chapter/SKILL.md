@@ -88,14 +88,16 @@ The author runs every command and writes every line of code. The AI's role is to
 The correct rhythm is:
 
 1. AI says: "Here's what to do next and why." Gives the exact code or command.
-2. Author runs it and pastes the output.
-3. AI explains what the output means and what it tells us.
+2. Author runs it and confirms it worked (or pastes output if it's unexpected or interesting).
+3. AI explains what the output means and what it tells us — based on what the output should be, or what the author reports.
 4. AI says what to do next.
 5. Repeat.
 
+The author does not need to paste routine output back. A simple "done" or "got it" is enough to move forward. The author should paste output when: it's unexpected, it's an error we need to discuss, or it's a key teaching moment (e.g. the first time a compiler error appears).
+
 Do NOT run `cargo test`, write files, or execute any part of the chapter yourself. Every piece of terminal output in the book must come from the author's terminal, not a tool call.
 
-The AI writes the prose *after* the author has completed each step and confirmed the output — not before, and not speculatively. Prose is written incrementally, one step at a time, and shown to the author for review before moving on.
+The AI writes the prose *after* the author has completed each step and confirmed it — not before, and not speculatively. Prose is written incrementally, one step at a time, and shown to the author for review before moving on.
 
 Do NOT write the full chapter in one go. Do NOT present a finished chapter for review. Teach step by step, in real time.
 
