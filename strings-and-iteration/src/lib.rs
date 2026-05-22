@@ -1,9 +1,5 @@
 pub fn repeat(s: &str, n: usize) -> String {
-    let mut result = String::new();
-    for _ in 0..n {
-        result.push_str(s);
-    }
-    result
+    s.repeat(n)
 }
 
 #[cfg(test)]
