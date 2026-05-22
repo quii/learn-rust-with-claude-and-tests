@@ -25,20 +25,13 @@ Plan chapter together → AI executes (TDD incrementally, real output) → autho
 
 ## Current state of the code
 
-### integers/src/lib.rs
+### strings-and-iteration/src/lib.rs
 
 Final state:
 
 ```rust
-/// Adds two integers together.
-///
-/// # Examples
-///
-/// ```
-/// assert_eq!(integers::add(2, 2), 4);
-/// ```
-pub fn add(a: i32, b: i32) -> i32 {
-    a + b
+pub fn repeat(s: &str, n: usize) -> String {
+    s.repeat(n)
 }
 
 #[cfg(test)]
@@ -46,8 +39,8 @@ mod tests {
     use super::*;
 
     #[test]
-    fn add_two_integers() {
-        assert_eq!(add(2, 2), 4);
+    fn repeat_a_string() {
+        assert_eq!(repeat("na", 4), "nananana");
     }
 }
 ```
@@ -62,9 +55,13 @@ mod tests {
    - Covers: `cargo new --lib`, `i32`, integer type family, no silent coercion, `///` doc comments, `cargo doc`, doc-tests, overflow behaviour
    - Testing: doc-tests as first-class tests alongside unit tests
 
+3. **Strings and Iteration** (`src/fundamentals/strings-and-iteration.md`, code in `strings-and-iteration/`)
+   - Covers: `String` vs `&str`, `let mut`, `String::new()`, `push_str`, `for _ in 0..n`, `usize`, refactoring to `s.repeat(n)`
+   - Testing: tests drive you to the right types
+
 ## Next steps
 
-1. Plan and write the next chapter — strings or iteration following LGWT order
+1. Plan and write the next chapter — following LGWT order
 
 ## Key files
 

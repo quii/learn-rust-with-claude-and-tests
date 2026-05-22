@@ -8,6 +8,7 @@
 
 - [Hello, World](./fundamentals/hello-world.md)
 - [Integers](./fundamentals/integers.md)
+- [Strings and Iteration](./fundamentals/strings-and-iteration.md)
 
 ---
 

@@ -43,4 +43,4 @@ E.g. `repeat("na", 4)` → `"nananana"`.
 - Implicit return on `result` (no semicolon) ties back to Hello World and Integers — good to call out the pattern again
 
 ## Status
-teaching-complete
+complete
