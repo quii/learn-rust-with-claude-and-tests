@@ -73,6 +73,7 @@ cargo test
 ```
 
 ```
+warning: unused import: `super::*`
 error[E0425]: cannot find function `greet` in this scope
   --> src/main.rs:11:20
    |
@@ -80,7 +81,7 @@ error[E0425]: cannot find function `greet` in this scope
    |                    ^^^^^ not found in this scope
 ```
 
-This is the **red** step. The compiler is telling you exactly what's missing.
+This is the **red** step. The compiler is telling you exactly what's missing. There's also a warning about the unused `use super::*` import — once `greet` exists, that import will be used and the warning will disappear.
 
 ### A few new concepts
 
@@ -96,23 +97,19 @@ This is the **red** step. The compiler is telling you exactly what's missing.
 
 ## Make it pass
 
-Add the `greet` function above `main`:
+Add the `greet` function above `main`, and update `main` to use it:
 
 ```rust
+fn main() {
+    println!("{}", greet());
+}
+
 fn greet() -> String {
     format!("Hello, World!")
 }
 ```
 
 `-> String` declares that the function returns an owned `String`. `format!` works like `println!` but returns a `String` instead of printing — exactly the separation we wanted.
-
-Update `main` to use it:
-
-```rust
-fn main() {
-    println!("{}", greet());
-}
-```
 
 Run the tests:
 
@@ -148,14 +145,13 @@ Run the tests:
 
 ```
 error[E0061]: this function takes 0 arguments but 1 argument was supplied
-  --> src/main.rs:15:20
+  --> src/main.rs:20:20
    |
-15 |         assert_eq!(greet("Alice"), "Hello, Alice!");
-   |                    ^^^^^ -------
-   |                          argument unexpected
+20 |         assert_eq!(greet("Alice"), "Hello, Alice!");
+   |                    ^^^^^ ------- unexpected argument of type `&'static str`
 ```
 
-The compiler has done our TODO list for us. `greet` doesn't take any arguments yet. Let's fix that — but minimally. Change the signature to accept a name:
+The compiler has done our TODO list for us. `greet` needs to accept a name. Let's add the parameter — but do the minimum: just change the signature, don't use `name` yet:
 
 ```rust
 fn greet(name: &str) -> String {
@@ -165,19 +161,54 @@ fn greet(name: &str) -> String {
 
 `&str` is a **string slice** — the standard type for borrowed string data in Rust. When a function just needs to read a string, `&str` is usually the right choice. We'll explore Rust's string types properly in a later chapter.
 
-The function now compiles, but the tests will tell us it's wrong:
+Run the tests:
 
 ```
-cargo test
+error[E0061]: this function takes 1 argument but 0 arguments were supplied
+ --> src/main.rs:2:20
+  |
+2 |     println!("{}", greet());
+  |                    ^^^^^-- argument #1 of type `&str` is missing
+
+error[E0061]: this function takes 1 argument but 0 arguments were supplied
+  --> src/main.rs:15:20
+   |
+15 |         assert_eq!(greet(), "Hello, World!");
+   |                    ^^^^^-- argument #1 of type `&str` is missing
+
+warning: unused variable: `name`
 ```
 
-```
-thread 'tests::greets_a_person_by_name' panicked at 'assertion failed: `(left == right)`
-  left: "Hello, World!",
- right: "Hello, Alice!"'
+Two things to notice. First: adding the parameter broke *two* places — `main` and the first test — both of which were calling `greet()` with no arguments. Second: Rust warns you about the unused `name` variable. It won't let you silently ignore things. Fix both call sites by passing `"World"` for now:
+
+```rust
+fn main() {
+    println!("{}", greet("World"));
+}
 ```
 
-Good — a clear failure message. Now make it pass:
+```rust
+#[test]
+fn test_greet() {
+    assert_eq!(greet("World"), "Hello, World!");
+}
+```
+
+Run the tests again:
+
+```
+warning: unused variable: `name`
+
+test tests::test_greet ... ok
+test tests::greets_a_person_by_name ... FAILED
+
+---- tests::greets_a_person_by_name stdout ----
+assertion `left == right` failed
+  left: "Hello, World!"
+ right: "Hello, Alice!"
+```
+
+It compiles. The first test passes, the second tells us exactly what's wrong. Make it pass by using `name`:
 
 ```rust
 fn greet(name: &str) -> String {
@@ -186,18 +217,14 @@ fn greet(name: &str) -> String {
 ```
 
 ```
-cargo test
-```
-
-```
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 
-But wait — our first test is now broken in spirit even if it passes. It currently calls `greet("World")`, which works, but `"World"` is just a string we happened to hardcode. What we actually want is: if no meaningful name is given, default to `"World"`. Let's make that requirement explicit.
+Both green, warning gone. But look at the first test — it's passing `"World"` as an argument. That works, but it feels off. We're not really testing that the function greets a person named "World" — we're using it as a stand-in for "no name given". That intent isn't expressed anywhere. Let's make it explicit.
 
 ## Default behaviour
 
-Update the first test to pass an empty string instead:
+Update the first test to pass an empty string instead, and rename it to reflect the intent:
 
 ```rust
 #[test]
@@ -206,15 +233,18 @@ fn greets_world_by_default() {
 }
 ```
 
-Run the tests. This one will now fail:
+Run the tests:
 
 ```
-thread 'tests::greets_world_by_default' panicked at 'assertion failed: `(left == right)`
-  left: "Hello, !",
- right: "Hello, World!"'
+test tests::greets_world_by_default ... FAILED
+
+---- tests::greets_world_by_default stdout ----
+assertion `left == right` failed
+  left: "Hello, !"
+ right: "Hello, World!"
 ```
 
-Now make it pass:
+Good — a clear failure. Now make it pass:
 
 ```rust
 fn greet(name: &str) -> String {
@@ -232,22 +262,10 @@ A couple of things here:
 Run the tests:
 
 ```
-cargo test
-```
-
-```
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 
-All green. Update `main` to reflect the new signature:
-
-```rust
-fn main() {
-    println!("{}", greet("World"));
-}
-```
-
-Commit.
+All green. Commit.
 
 ## Wrapping up
 

@@ -3,11 +3,8 @@ fn main() {
 }
 
 fn greet(name: &str) -> String {
-    if name.is_empty() {
-        format!("Hello, World!")
-    } else {
-        format!("Hello, {}!", name)
-    }
+    let name = if name.is_empty() { "World" } else { name };
+    format!("Hello, {}!", name)
 }
 
 #[cfg(test)]
