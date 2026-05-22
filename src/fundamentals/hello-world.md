@@ -267,6 +267,83 @@ test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 All green. Commit.
 
+## One more thing: Option
+
+The empty string approach works, but it's a workaround. We're using `""` to signal "no value given" — but an empty string is a valid string. We're abusing it as a sentinel. Rust has a proper way to express "this value may or may not be present": `Option`.
+
+Update both tests:
+
+```rust
+#[test]
+fn greets_world_by_default() {
+    assert_eq!(greet(None), "Hello, World!");
+}
+
+#[test]
+fn greets_a_person_by_name() {
+    assert_eq!(greet(Some("Alice")), "Hello, Alice!");
+}
+```
+
+Run the tests:
+
+```
+error[E0308]: mismatched types
+  --> src/main.rs:16:26
+   |
+16 |         assert_eq!(greet(None), "Hello, World!");
+   |                    ----- ^^^^ expected `&str`, found `Option<_>`
+
+error[E0308]: mismatched types
+  --> src/main.rs:21:26
+   |
+21 |         assert_eq!(greet(Some("Alice")), "Hello, Alice!");
+   |                    ----- ^^^^^^^^^^^^^ expected `&str`, found `Option<&str>`
+```
+
+Both tests fail to compile — the function still expects `&str`. Update the signature:
+
+```rust
+fn greet(name: Option<&str>) -> String {
+    let name = name.unwrap_or("World");
+    format!("Hello, {}!", name)
+}
+```
+
+`Option<&str>` is Rust's way of saying "a string that may or may not be there". It has two variants: `Some("Alice")` when a value is present, and `None` when it isn't. There's no `null`, no empty string as a signal — the absence of a value is encoded in the type itself.
+
+`unwrap_or("World")` extracts the value from `Some`, or returns `"World"` if it's `None`. This replaces the entire `is_empty` check with something that expresses the intent directly.
+
+Run the tests:
+
+```
+error[E0308]: mismatched types
+ --> src/main.rs:2:26
+  |
+2 |     println!("{}", greet("World"));
+  |                    ----- ^^^^^^^ expected `Option<&str>`, found `&str`
+  |
+help: try wrapping the expression in `Some`
+  |
+2 |     println!("{}", greet(Some("World")));
+```
+
+`main` also needs updating — and the compiler even tells us how. Since we want to show the default behaviour, pass `None`:
+
+```rust
+fn main() {
+    println!("{}", greet(None));
+}
+```
+
+Run the tests:
+
+```
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+All green. The code is cleaner, the intent is clearer, and we've removed the empty string workaround entirely. Commit.
+
 ## Wrapping up
 
 We've covered a lot of ground in a small program.
@@ -279,6 +356,8 @@ We've covered a lot of ground in a small program.
 - `format!`, `println!` — macros for working with strings
 - `if` as an expression
 - Variable shadowing with `let`
+- `Option<T>` — representing a value that may or may not be present
+- `unwrap_or` — extracting a value from an `Option` with a fallback
 
 ### Testing concepts
 

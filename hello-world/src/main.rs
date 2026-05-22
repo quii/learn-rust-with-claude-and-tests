@@ -1,9 +1,9 @@
 fn main() {
-    println!("{}", greet("World"));
+    println!("{}", greet(None));
 }
 
-fn greet(name: &str) -> String {
-    let name = if name.is_empty() { "World" } else { name };
+fn greet(name: Option<&str>) -> String {
+    let name = name.unwrap_or("World");
     format!("Hello, {}!", name)
 }
 
@@ -13,11 +13,11 @@ mod tests {
 
     #[test]
     fn greets_world_by_default() {
-        assert_eq!(greet(""), "Hello, World!");
+        assert_eq!(greet(None), "Hello, World!");
     }
 
     #[test]
     fn greets_a_person_by_name() {
-        assert_eq!(greet("Alice"), "Hello, Alice!");
+        assert_eq!(greet(Some("Alice")), "Hello, Alice!");
     }
 }
