@@ -136,6 +136,8 @@ running 1 test
 test src/lib.rs - add (line 5) ... ok
 
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+all doctests ran in 0.49s; merged doctests compilation took 0.24s
 ```
 
 `Doc-tests integers` now shows 1 test passing — the example from the `///` comment. This is one of Rust's better ideas: documentation that goes stale breaks the build. Change `add` and forget to update the example, and `cargo test` will catch it.
