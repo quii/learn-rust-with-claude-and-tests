@@ -114,6 +114,11 @@ The AI should prompt the author to do this before committing. If anything doesn'
 
 ### 10. Commit discipline
 
+There are two phases: **teaching** and **writing**.
+
+During the **teaching phase**, do not ask the author to commit. When a green point is reached, say "we'd commit here" and move on. The code will be written properly during the writing phase.
+
+During the **writing phase** (when producing the final committed chapter):
 - Commit at every green point, before adding the next requirement
 - The final commit message for a chapter should be: `<Chapter Name>: chapter prose and code following TDD steps incrementally`
 - The `target/` directory is gitignored — never commit build output
