@@ -1,7 +1,19 @@
 ---
 name: write-chapter
-description: Use when writing or editing a chapter for Learn Rust with Tests. Covers the full workflow from coding incrementally through TDD, capturing real output, writing prose, and verifying the chapter as a reader.
+description: Use when writing or editing a chapter for Learn Rust with Tests.
 ---
+
+# Deprecated
+
+This skill has been replaced by four focused agents in `.opencode/agents/`:
+
+- `@planner` — propose the next chapter, output: `proposals/<chapter-name>.md`
+- `@teacher` — teach the author step by step, output: teaching notes appended to proposal
+- `@writer` — write the prose and code following strict TDD, output: committed chapter
+- `@reviewer` — work through the chapter as a naive learner, output: review report
+
+Invoke them in that order for each new chapter.
+
 
 # Writing a Chapter for Learn Rust with Tests
 
