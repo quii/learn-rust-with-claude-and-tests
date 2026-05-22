@@ -2,7 +2,7 @@
 
 _Learn Rust by writing tests, guided by the principles of TDD._
 
-This book is inspired by [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests). The idea is simple: learn Rust incrementally, one small test at a time. Each chapter introduces a language concept or technique and uses Test-Driven Development to explore it.
+I am the author of [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests) - a reasonably popular way of learning Go and TDD, and I am taking the same approach for Rust. The idea is simple: learn Rust incrementally, one small test at a time. Each chapter introduces a language concept or technique and uses Test-Driven Development to explore it.
 
 ## Reading the book
 
