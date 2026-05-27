@@ -71,7 +71,8 @@ There's no type you can put where `???` is. Traits solve this.
 - `dyn Shape` vs `&impl Shape`: `&impl Shape` is resolved at compile time (one concrete type); `&dyn Shape` is resolved at runtime (any type, mixed in a collection); `describe_area` updated to take `&dyn Shape` to work with the table test
 - Without named cases, a failing table test only shows the values — not which case failed; adding a `&str` name and using `assert_eq!(..., "failed for {}", name)` fixes this; author confirmed the improvement
 - Final code: `structs/src/lib.rs` — `Shape` trait, `impl Shape for Rectangle/Circle/Triangle`, `describe_area(&dyn Shape)`, table test with named cases
-- Individual `description_of_rectangle/circle/triangle` tests kept alongside the table test during teaching — writer can remove them as redundant since the table test covers the same ground
+- `&impl Shape` vs `&dyn Shape`: `&impl Shape` is resolved at compile time — the compiler knows the concrete type, generates specialised code, zero runtime overhead; use it for single-value function parameters. `&dyn Shape` is resolved at runtime via a vtable — small overhead, type is erased, but different types can live in the same collection; use it when you need a heterogeneous collection. Prose should explain this when `dyn` is introduced, not before.
+- Table test refactoring: restructuring tests without changing what they assert is valid — the existing tests are the safety net. But after restructuring, deliberately break one assertion to confirm the test still fails correctly and the failure message is useful. An evergreen test that never fails is worthless. This is worth saying explicitly in the prose when the table test is introduced.
 
 ## Status
 teaching-complete
