@@ -10,6 +10,7 @@
 - [Integers](./fundamentals/integers.md)
 - [Strings and Iteration](./fundamentals/strings-and-iteration.md)
 - [Structs](./fundamentals/structs.md)
+- [Traits](./fundamentals/traits.md)
 
 ---
 

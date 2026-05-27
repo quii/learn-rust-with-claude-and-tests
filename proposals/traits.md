@@ -75,4 +75,4 @@ There's no type you can put where `???` is. Traits solve this.
 - Table test refactoring: restructuring tests without changing what they assert is valid — the existing tests are the safety net. But after restructuring, deliberately break one assertion to confirm the test still fails correctly and the failure message is useful. An evergreen test that never fails is worthless. This is worth saying explicitly in the prose when the table test is introduced.
 
 ## Status
-teaching-complete
+complete
