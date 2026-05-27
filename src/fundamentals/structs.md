@@ -198,7 +198,31 @@ This is the problem that *methods* solve.
 
 Instead of a free function `area` that takes a shape, each shape gets its own `area` method — `rectangle.area()` and `circle.area()`. They live on different types so there's no collision.
 
-A method is defined in an `impl` block. Here's the syntax:
+Start with the test. Update the circle test to express the API you want:
+
+```rust
+#[test]
+fn area_of_circle() {
+    let c = Circle { radius: 10.0 };
+    assert_eq!(c.area(), 314.1592653589793);
+}
+```
+
+Also delete the `area(c: Circle)` free function — you're replacing it. Run `cargo test`:
+
+```
+error[E0599]: no method named `area` found for struct `Circle` in the current scope
+   |
+ 7 | pub struct Circle {
+   | ----------------- method `area` not found for this struct
+...
+   |         assert_eq!(c.area(), 314.1592653589793);
+   |                      ^^^^ method not found in `Circle`
+```
+
+The compiler is telling you exactly what's missing. Now add it.
+
+A method is defined in an `impl` block:
 
 ```rust
 impl Circle {
@@ -210,9 +234,7 @@ impl Circle {
 
 `impl Circle` opens a block where you define methods that belong to `Circle`. The first parameter `&self` is how a method refers to the value it's called on — `self` is the circle, `&` means it's borrowed rather than owned. Inside the method you access fields as `self.radius`.
 
-The disciplined move here is to get back to green as quickly as possible. The build is broken because of the `Circle` `area` collision — fix that first, without touching the `Rectangle` code that's already working.
-
-Delete the new `area(c: Circle)` free function. Replace it with an `impl Circle` block. Update the circle test to call `c.area()`. Leave the `Rectangle` free functions and tests alone for now.
+The disciplined move is to get back to green as quickly as possible — fix `Circle` first, without touching the `Rectangle` code that's still working.
 
 For the circle area formula you'll need π. It lives in the standard library:
 
