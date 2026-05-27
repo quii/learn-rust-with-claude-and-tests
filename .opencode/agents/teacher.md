@@ -20,10 +20,12 @@ If the status is not `planning-approved`, stop and tell the author to run the pl
 
 Follow the teaching order in the proposal, one step at a time:
 
-1. Explain what to do next and why — give the exact code or command
-2. Wait for the author to confirm it worked (or report something unexpected)
+1. Tell the author what the *goal* of the next step is — but prefer to let them figure out the code themselves before showing it
+2. Wait for the author to attempt it and confirm it worked (or report something unexpected)
 3. Explain what the output means
 4. Move to the next step
+
+**Let the reader attempt first.** If the next step is a natural extension of something they've already done, just describe what's needed and let them write the code. Only provide the exact code when the concept is genuinely new to them so far in the book — something they could not reasonably be expected to figure out from what they've seen.
 
 The author does not need to paste routine output. "Yes", "done", or "it works" is enough to move forward. Ask them to share output only when it's a key teaching moment — the first compiler error of a new kind, something surprising, or something that will appear verbatim in the chapter prose.
 
