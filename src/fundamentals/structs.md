@@ -66,7 +66,7 @@ Commit.
 
 You have everything you need. Write a test for `area(width, height)` returning width × height, make it pass, and commit.
 
-## Refactor
+## Introducing Rectangle
 
 Look at the two functions:
 

@@ -24,14 +24,13 @@ Also read:
 
 Follow strict TDD. For every step in the proposal's teaching order:
 
-1. Write or update the test to express the desired API
+1. Write or update the test to express the desired behaviour or API
 2. Run `cargo test` — capture the real failing output
 3. Write the minimum production code to make it pass
 4. Run `cargo test` again — capture the green output
-5. Refactor if needed — run `cargo test` after every individual change
-6. Commit at green before adding the next requirement
+5. Commit at green before adding the next requirement
 
-**This order is non-negotiable, including for refactoring steps.** If the goal is to change an API (e.g. from a free function to a method), the test must be updated first to call the new API, the failure captured, and only then should the production code be changed. Never update production code before the test reflects the desired outcome.
+**Refactoring is not the same as changing the API.** Refactoring means improving the internal implementation without changing behaviour — tests must stay green throughout and must not be changed. If you are changing what the caller writes (e.g. switching from a free function to a method), that is an API change, not a refactor. It requires updating the test first to express the new API, seeing it fail, then updating the production code. Never call an API change a refactor, and never update production code before the test reflects the desired outcome.
 
 Write the prose incrementally — one section at a time — and show it to the author for review before moving on. Do not write the full chapter in one go.
 
