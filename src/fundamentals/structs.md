@@ -263,7 +263,7 @@ test tests::perimeter_of_rectangle ... ok
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 
-Green. Now refactor `Rectangle` to use methods too — delete the `perimeter` and `area` free functions, and add an `impl Rectangle` block with both as methods. Update the tests to call `r.perimeter()` and `r.area()`. This is the same pattern you just used for `Circle`.
+Green. Now do the same for `Rectangle`. But follow the same discipline — tests first. Update both rectangle tests to call `r.perimeter()` and `r.area()` instead of the free functions. Run `cargo test` and see them fail, then update the production code to match.
 
 Once you're green again, your final `lib.rs` should look like this:
 

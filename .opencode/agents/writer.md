@@ -24,14 +24,14 @@ Also read:
 
 Follow strict TDD. For every step in the proposal's teaching order:
 
-1. Write the test
-2. Run `cargo test` — capture the real output
-3. Write the minimum implementation
-4. Run `cargo test` again — capture the real output
+1. Write or update the test to express the desired API
+2. Run `cargo test` — capture the real failing output
+3. Write the minimum production code to make it pass
+4. Run `cargo test` again — capture the green output
 5. Refactor if needed — run `cargo test` after every individual change
 6. Commit at green before adding the next requirement
 
-Never skip ahead. Never reconstruct output from memory. Every compiler error, warning, and test result in the prose must come from actually running the command.
+**This order is non-negotiable, including for refactoring steps.** If the goal is to change an API (e.g. from a free function to a method), the test must be updated first to call the new API, the failure captured, and only then should the production code be changed. Never update production code before the test reflects the desired outcome.
 
 Write the prose incrementally — one section at a time — and show it to the author for review before moving on. Do not write the full chapter in one go.
 
