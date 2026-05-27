@@ -27,39 +27,55 @@ Plan chapter together → AI executes (TDD incrementally, real output) → autho
 
 ### structs/src/lib.rs
 
-Final state:
+Final state after traits chapter:
 
 ```rust
+use std::f64::consts::PI;
+
+pub trait Shape {
+    fn area(&self) -> f64;
+}
+
 pub struct Rectangle {
     pub width: f64,
     pub height: f64,
+}
+
+pub struct Circle {
+    pub radius: f64,
+}
+
+pub struct Triangle {
+    pub base: f64,
+    pub height: f64,
+}
+
+impl Shape for Rectangle {
+    fn area(&self) -> f64 {
+        self.width * self.height
+    }
+}
+
+impl Shape for Circle {
+    fn area(&self) -> f64 {
+        PI * self.radius * self.radius
+    }
+}
+
+impl Shape for Triangle {
+    fn area(&self) -> f64 {
+        0.5 * self.base * self.height
+    }
 }
 
 impl Rectangle {
     pub fn perimeter(&self) -> f64 {
         2.0 * (self.width + self.height)
     }
-
-    pub fn area(&self) -> f64 {
-        self.width * self.height
-    }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn perimeter_of_rectangle() {
-        let r = Rectangle { width: 10.0, height: 5.0 };
-        assert_eq!(r.perimeter(), 30.0);
-    }
-
-    #[test]
-    fn area_of_rectangle() {
-        let r = Rectangle { width: 10.0, height: 5.0 };
-        assert_eq!(r.area(), 50.0);
-    }
+pub fn describe_area(shape: &dyn Shape) -> String {
+    format!("This shape has an area of {}", shape.area())
 }
 ```
 
@@ -80,6 +96,10 @@ mod tests {
 4. **Structs** (`src/fundamentals/structs.md`, code in `structs/`)
    - Covers: `struct`, `pub` on fields, `f64`, field access with `.`, `impl`, `&self`, ownership contrast (`r: Rectangle` takes ownership, `&self` borrows)
    - Testing: writing a test before the type exists; fixing compiler errors one at a time
+
+5. **Traits** (`src/fundamentals/traits.md`, code in `structs/`)
+   - Covers: `trait`, `impl Trait for Type`, `&impl Shape` (compile-time dispatch), `&dyn Shape` (runtime dispatch, vtable), `Vec<T>`, `vec![]`, tuples, table tests
+   - Testing: table tests for same behaviour with different inputs; restructuring tests without changing assertions; deliberately breaking a test to confirm it can fail
 
 ## Key files
 
