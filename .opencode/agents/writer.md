@@ -18,7 +18,8 @@ If the status is not `teaching-complete`, stop and tell the author to run the te
 
 Also read:
 - `AGENTS.md` — for repo structure and conventions
-- An existing chapter (e.g. `src/fundamentals/hello-world.md`) — to match the voice
+- `src/principles/test-behaviour-not-implementation.md` — required; governs how tests and refactoring relate
+- An existing chapter (e.g. `src/fundamentals/strings-and-iteration.md`) — to match the voice
 
 ## How to write
 
