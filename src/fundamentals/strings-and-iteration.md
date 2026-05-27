@@ -158,3 +158,8 @@ Commit.
 We wrote the loop manually first, then replaced it with a standard library method. There's a whole family of tools in Rust for working with iterators — `map`, `filter`, `collect` and more. We'll get to those in a later chapter.
 
 See [The TDD Cycle](../principles/tdd-cycle.md) for more on why each step matters.
+
+### Further reading
+
+- [`String` vs `&str`](https://doc.rust-lang.org/book/ch08-02-strings.html) — ownership explains why Rust has two string types; this chapter makes it click
+- [Control flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html) — `for` loops, ranges, and the iterator pattern that underpins them

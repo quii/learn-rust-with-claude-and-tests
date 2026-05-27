@@ -344,3 +344,9 @@ Commit.
 `Rectangle` and `Circle` both have an `area` method, but they have no connection in the type system. You can't write a function that accepts either one. That's what traits are for — the next chapter.
 
 See [The TDD Cycle](../principles/tdd-cycle.md) and [Separating Concerns](../principles/separating-concerns.md).
+
+### Further reading
+
+- [Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) — the full picture: tuple structs, unit structs, and when to use each
+- [Method syntax](https://doc.rust-lang.org/book/ch05-03-method-syntax.html) — `impl`, `&self`, associated functions, and the difference between methods and free functions
+- [Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) — the deeper reason `&self` borrows instead of taking ownership; essential Rust reading

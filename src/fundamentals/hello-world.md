@@ -371,3 +371,9 @@ We've covered a lot of ground in a small program.
 We followed the cycle deliberately: write a failing test, write the minimum code to make it pass, refactor. Notice how the compiler errors guided each step — in Rust, the compiler is a collaborator, not an obstacle. Learning to read what it's telling you is one of the most valuable things you can do early on.
 
 See [The TDD Cycle](../principles/tdd-cycle.md) for more on why each step matters.
+
+### Further reading
+
+- [Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) — parameters, return types, and how Rust functions differ from what you may be used to
+- [`String` vs `&str`](https://doc.rust-lang.org/book/ch08-02-strings.html) — ownership explains why Rust has two string types; this chapter makes it click
+- [`Option<T>`](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html#the-option-enum-and-its-advantages-over-null-values) — why Rust has no `null`, and how `Option` models the absence of a value safely

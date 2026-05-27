@@ -178,3 +178,8 @@ You can also opt in to explicit behaviour: `.checked_add()` returns `None` on ov
 - `cargo test` runs both unit tests and doc-tests automatically
 
 See [The TDD Cycle](../principles/tdd-cycle.md) for more on why each step matters.
+
+### Further reading
+
+- [Integer types](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-types) — the full family of signed and unsigned types, when to use each
+- [Integer overflow](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow) — why debug and release builds behave differently, and what to do when you care

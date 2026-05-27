@@ -44,6 +44,22 @@ Write the prose incrementally — one section at a time — and show it to the a
 - Link to `src/principles/` rather than re-explaining TDD concepts inline
 - Introduce at most one or two new Rust concepts per step
 
+## Wrapping up section
+
+Every chapter must end with a `## Wrapping up` section containing:
+
+1. `### Rust concepts introduced` — bullet list of every concept introduced in the chapter
+2. `### Testing concepts` — bullet list of testing insights from the chapter
+3. `### Further reading` — links to deeper resources for concepts where a reader would genuinely benefit; not every bullet needs a link, only ones with real depth to explore
+
+**Further reading guidance:**
+- Link to the [Rust Book](https://doc.rust-lang.org/book/) as the primary source; use other authoritative sources (e.g. the Rust Reference, Rustonomicon) where the Rust Book doesn't cover the topic adequately
+- Each link must have a motivating description — not just a label. Tell the reader *why* they'd want to follow it. Examples of good descriptions:
+  - `[Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) — the deeper reason \`&self\` borrows instead of taking ownership; essential Rust reading`
+  - `[Integer overflow](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow) — why debug and release builds behave differently, and what to do when you care`
+  - `[\`Option<T>\`](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html#the-option-enum-and-its-advantages-over-null-values) — why Rust has no \`null\`, and how \`Option\` models the absence of a value safely`
+- Do not link to everything — only concepts where deeper reading adds real value (e.g. ownership, traits, `Option`, iterators — yes; `cargo new`, `assert_eq!` — no)
+
 ## Proof-read checklist — REQUIRED before committing the final chapter
 
 Do not commit the chapter or tell the author it is done before completing every item:
